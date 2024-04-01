@@ -6,8 +6,8 @@
 
 namespace MyNamespace {
 
-    class Math_vector {
-    public:
+    struct Math_vector {
+        
         double x;
         double y;
 
@@ -17,11 +17,17 @@ namespace MyNamespace {
 
         Math_vector operator+(const Math_vector& other) const;
 
-        double operator*(const Math_vector& other) const;
+        Math_vector operator-(const Math_vector& other) const;
+
+        double operator*(const Math_vector& other) const; // scalar product
 
         double squared_module() const;
 
         double module() const;
+
+        double squared_distance(const Math_vector& other) const;
+
+        double distance(const Math_vector& other) const;
 
         void print(const char* end = "\n") const;
     };

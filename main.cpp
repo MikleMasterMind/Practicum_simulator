@@ -1,14 +1,11 @@
 #include <iostream>
 #include "Math_vector.hpp"
+#include "Painter.hpp"
 
 int main() {
-    MyNamespace::Math_vector vector(1.0, 2.0);
-    MyNamespace::Math_vector vector2(2.0, -10.0);
-    MyNamespace::Math_vector vector3 = vector + vector2;
-    vector.print();
-    vector3.print();
-    vector2 = vector2 * 2;
-    vector2.print();
-    std::cout << vector.module() << " " << vector.squared_module();
-    return 0;
+    Fl_Window *win =  new Fl_Window(640, 480, "Window");
+    MyNamespace::Painter* painter = MyNamespace::Painter::getPainter(0, 0, 640, 480, "AAAA");
+    win->show();
+    painter->update();
+    return Fl::run();
 }

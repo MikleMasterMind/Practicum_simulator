@@ -1,16 +1,34 @@
 COMPILER = g++
-FLAGS = -c -Wall
+CFLAGS = -c -Wall
+WINFLAGS = -lfltk -lX11
+
+ALL = main.o \
+	Math_vector.o \
+	Painter.o \
+	Particle.o \
+	Circle.o
 
 all: main
 
-main: main.o Math_vector.o
-	$(COMPILER) -o main main.o Math_vector.o
+main: $(ALL)
+	$(COMPILER) -o main $(ALL) $(WINFLAGS)
 
 main.o: main.cpp
-	$(COMPILER) $(FLAGS) main.cpp
+	$(COMPILER) $(CFLAGS) $(WINFLAGS) main.cpp
 
 Math_vector.o: Math_vector.cpp
-	$(COMPILER) $(FLAGS) Math_vector.cpp
+	$(COMPILER) $(CFLAGS) Math_vector.cpp
+
+Painter.o: Painter.cpp
+	$(COMPILER) $(CFLAGS) $(WINFLAGS) Painter.cpp
+
+Particle.o: Particle.cpp
+	$(COMPILER) $(CFLAGS) Particle.cpp
+
+Circle.o: Circle.cpp
+	$(COMPILER) $(CFLAGS) Circle.cpp
+
+
 
 clear:
 	rm *.o main
