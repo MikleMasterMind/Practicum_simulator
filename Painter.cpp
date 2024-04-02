@@ -39,13 +39,8 @@ void Box_wiht_balls::Painter::draw() {
 
 }
 
-void Box_wiht_balls::Painter::update() {
+void Box_wiht_balls::Painter::update_image() {
     label(""); // clear scene
     redraw();
-}
-
-void Box_wiht_balls::Painter::timer_callback(void* data) {
-    Painter* self = static_cast<Painter*>(data);
-    self->update();
 }
 

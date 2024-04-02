@@ -9,10 +9,10 @@ ALL = main.o \
 	Circle.o \
 	System.o
 
-all: main
+all: ./a.out
 
-main: $(ALL)
-	$(COMPILER) -o main $(ALL) $(WINFLAGS)
+./a.out: $(ALL)
+	$(COMPILER) $(ALL) $(WINFLAGS)
 
 main.o: main.cpp
 	$(COMPILER) $(CFLAGS) $(WINFLAGS) main.cpp
@@ -35,4 +35,4 @@ System.o: System.cpp
 
 
 clear:
-	rm *.o main
+	rm *.o a.out

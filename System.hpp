@@ -4,6 +4,15 @@
 #include "Particle.hpp"
 #include <vector>
 
+#define TIME_STEP 0.0001
+#define UP_BOUND 0
+#define DOWN_BOUND 640
+#define LEFT_BOUND 0
+#define RIGTH_BOUND 1180
+#define MAX_SPEED 300
+#define MAX_RADIUS 100
+
+
 namespace Box_wiht_balls {
 
     class System {
@@ -32,6 +41,8 @@ namespace Box_wiht_balls {
         Particle* get_particle(); // return poiter to particle from container
 
         void phisics_update(); // simulation phisics step
+
+        void generate_particles(int amount, int seed);
 
     };
 }

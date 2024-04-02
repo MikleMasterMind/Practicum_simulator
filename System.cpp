@@ -1,6 +1,6 @@
 #include "System.hpp"
 
-Box_wiht_balls::System::System() : time_step(0.001) {}
+Box_wiht_balls::System::System() : time_step(TIME_STEP) {}
 
 Box_wiht_balls::System::~System() {
     for (int i = 0; i < container.size(); ++i) {
@@ -35,11 +35,38 @@ void Box_wiht_balls::System::phisics_update() {
     for (int i = 0; i < container.size(); ++i) {
         Particle* patrticle = container[i];
         patrticle->move(time_step);
+        patrticle->resolve_bound_collision(patrticle->check_bound_collision(UP_BOUND, DOWN_BOUND, LEFT_BOUND, RIGTH_BOUND));
         set_container();
-        Particle* other;
-        while (other = get_particle()) {
-            if (patrticle->collision(other))
-                patrticle->resolve_collision(other);
+        for (Particle* other = get_particle(); other != nullptr; other = get_particle()) {
+            if (patrticle->collision(other))  {
+                //patrticle->resolve_collision(other);
+            }
         }
+    }
+}
+
+void Box_wiht_balls::System::generate_particles(int amount, int seed) {
+    for (int i = 0; i < amount;) {
+        double radius = rand() % MAX_RADIUS;
+        double x = abs(rand()) % RIGTH_BOUND;
+        double y = abs(rand()) % DOWN_BOUND;
+        double vx = abs(rand()) % MAX_SPEED;
+        double vy = abs(rand()) % MAX_SPEED;
+        Box_wiht_balls::Particle* a = new Box_wiht_balls::Particle(radius, x, y, vx, vy);
+        if (a->check_bound_collision(UP_BOUND, DOWN_BOUND, LEFT_BOUND, RIGTH_BOUND) == no_bound) {
+            set_container();
+            for (Particle* b = get_particle(); b != nullptr; b = get_particle()) {
+                if (a->collision(b)) {
+                    delete a;
+                    a = nullptr;
+                    break;
+                }
+            }
+            if (a) {
+                add_particle(a);
+                ++i;
+            }
+        }
+        
     }
 }

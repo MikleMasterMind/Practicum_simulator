@@ -34,7 +34,7 @@ namespace Box_wiht_balls {
 
         void draw(); // to paint shot
 
-        void update(); // to udpate movement
+        void update_image(); // to udpate movement
 
         static void timer_callback(void* data); // timer
     };
