@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-namespace MyNamespace {
+namespace Box_wiht_balls {
 
     struct Math_vector {
         
@@ -21,13 +21,13 @@ namespace MyNamespace {
 
         double operator*(const Math_vector& other) const; // scalar product
 
-        double squared_module() const;
+        double squared_module() const; // to get quiqly squared module
 
-        double module() const;
+        double module() const; // if you need not squared module (else better use squared_module)
 
-        double squared_distance(const Math_vector& other) const;
+        double squared_distance(const Math_vector& other) const; // to get quiqly squared distance
 
-        double distance(const Math_vector& other) const;
+        double distance(const Math_vector& other) const; // if you need not squared distance (else better use squared_distance)
 
         void print(const char* end = "\n") const;
     };

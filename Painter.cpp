@@ -6,23 +6,27 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Box.H>
 
-MyNamespace::Painter::Painter(int x, int y, int w, int h, const char* s) : Fl_Box(x, y, w, h, s) {}
+Box_wiht_balls::Painter::Painter(int x, int y, int w, int h, const char* s) : 
+    Fl_Box(x, y, w, h, s) {}
 
-MyNamespace::Painter::~Painter() {
+Box_wiht_balls::Painter::~Painter() {
     delete instance;
     instance = nullptr;
 }
 
-MyNamespace::Painter* MyNamespace::Painter::getPainter(int x, int y, int w, int h, const char* s) {
+Box_wiht_balls::Painter* Box_wiht_balls::Painter::getPainter(int x, int y, int w, int h, const char* s) {
     if (!instance)
         instance = new Painter(x, y, w, h, s);
     return instance;
 }
 
-void MyNamespace::Painter::draw() {
+Box_wiht_balls::Painter* Box_wiht_balls::Painter::instance = nullptr;
 
-    Particle *particle = new Particle(50, 100, 100, 0, 0);
+void Box_wiht_balls::Painter::add_particle(Box_wiht_balls::Particle *particle) {
     particles.push_back(particle);
+}
+
+void Box_wiht_balls::Painter::draw() {
     
     Fl_Box::draw();
     fl_color(FL_RED);
@@ -35,14 +39,13 @@ void MyNamespace::Painter::draw() {
 
 }
 
-void MyNamespace::Painter::update() {
+void Box_wiht_balls::Painter::update() {
+    label(""); // clear scene
     redraw();
-    Fl::add_timeout(0.1, timer_callback, this);
 }
 
-void MyNamespace::Painter::timer_callback(void* data) {
+void Box_wiht_balls::Painter::timer_callback(void* data) {
     Painter* self = static_cast<Painter*>(data);
     self->update();
 }
 
-MyNamespace::Painter* MyNamespace::Painter::instance = nullptr;

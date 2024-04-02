@@ -1,7 +1,7 @@
 #ifndef _Circle_H_
 #define _Circle_H_
 
-namespace MyNamespace {
+namespace Box_wiht_balls {
     struct Circle {
         double x;
         double y;

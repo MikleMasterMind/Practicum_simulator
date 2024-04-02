@@ -11,13 +11,12 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Box.H>
 
-namespace MyNamespace {
+namespace Box_wiht_balls {
 
     class Painter : public Fl_Box {
 
-        static Painter* instance;
-
-        std::vector<Particle*> particles;
+        static Painter* instance; // keep only 1 object here
+        std::vector<Particle*> particles; // container with particles to draw
 
         Painter(int x, int y, int w, int h, const char* s);
 
@@ -29,16 +28,16 @@ namespace MyNamespace {
 
         ~Painter();
 
-        static Painter* getPainter(int x, int y, int w, int h, const char* s = "mywin");
+        static Painter* getPainter(int x, int y, int w, int h, const char* s = ""); // return pointer to object (object stored in heap)
 
-        void draw();
+        void add_particle(Particle* particle);
 
-        void update();
+        void draw(); // to paint shot
 
-        static void timer_callback(void* data);
+        void update(); // to udpate movement
+
+        static void timer_callback(void* data); // timer
     };
 }
-
-
 
 #endif // ! _Painter_H_
