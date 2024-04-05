@@ -29,6 +29,8 @@ namespace Box_wiht_balls {
 
         void add_particle(Particle* particle); // add particle to container
 
+        void delete_particle(int i = -1);
+
         void open_container(); // prepare to work with container of particles
 
         Particle* get_particle(); // return poiter to particle from container

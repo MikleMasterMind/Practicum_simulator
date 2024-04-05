@@ -11,6 +11,7 @@ int main() {
     int seed = 1;
     int amount = 10;
     sim->generate_particles(seed, amount);
+    sim->end();
     sim->show();
     return Fl::run();
 }

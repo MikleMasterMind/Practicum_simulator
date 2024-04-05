@@ -26,6 +26,8 @@ namespace Box_wiht_balls {
 
         void add_particle(Particle* particle);
 
+        void delete_particle(int i = -1);
+
         void draw(); // to paint shot
 
         void update_image(); // to udpate movement

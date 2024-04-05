@@ -14,6 +14,12 @@ void Box_wiht_balls::Painter::add_particle(Box_wiht_balls::Particle *particle) {
     particles.push_back(particle);
 }
 
+void Box_wiht_balls::Painter::delete_particle(int i) {
+    if (particles.empty()) return;
+    if (i == -1) particles.pop_back();
+    else particles.erase(particles.begin() + i);
+}
+
 void Box_wiht_balls::Painter::draw() {
     Fl_Box::draw();
     fl_begin_polygon();

@@ -12,6 +12,12 @@ void Box_wiht_balls::System::add_particle(Box_wiht_balls::Particle *particle) {
     container.push_back(particle);
 }
 
+void Box_wiht_balls::System::delete_particle(int i) {
+    if (container.empty()) return;
+    if (i == -1) container.pop_back();
+    else container.erase(container.begin() + i);
+}
+
 void Box_wiht_balls::System::open_container() {
     index = 0;
 }

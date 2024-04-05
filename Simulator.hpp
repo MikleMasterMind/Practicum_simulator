@@ -19,8 +19,9 @@
 namespace Box_wiht_balls {
 
     enum btn {
-        begin_btn_x = 20,
-        begin_btn_y = 650,
+        btn_x = 20,
+        btn_y = 650,
+        spacing = 50,
         btn_w = 100,
         btn_h = 40
     };
@@ -30,20 +31,38 @@ namespace Box_wiht_balls {
         System* sys;
         Painter* pain;
         Fl_Button* begin_btn;
+        Fl_Button* add_particle_btn;
+        Fl_Window* dialog_add;
+        Fl_Button* add_small_particle_btn;
+        Fl_Button* add_big_particle_btn;
+        Fl_Button* delete_particle_btn;
+        Fl_Window* dialog_delete;
+        Fl_Button* delete_small_particle_btn;
+        Fl_Button* delete_big_particle_btn;
 
     public:
 
         Simulator();
 
+        ~Simulator();
+
+        void add_particle();
+
         void generate_particles(int seed, int amount);
 
         void draw();
 
-        //void simulate_step();
-
-        static void step_callback(Fl_Widget* w, void* a);
+        static void step_callback(Fl_Widget* w, void* data);
 
         static void timer_callback(void* a);
+
+        static void show_dialog_add_callback(Fl_Widget* w, void* data);
+
+        static void add_particle_callback(Fl_Widget* w, void* data);
+
+        static void show_dialog_delete_callback(Fl_Widget* w, void* data);
+
+        static void delete_particle_callback(Fl_Widget* w, void* data);
 
     };
 }
