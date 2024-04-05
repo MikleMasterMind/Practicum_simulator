@@ -37,7 +37,7 @@ void Box_wiht_balls::System::phisics_update() {
         open_container();
         for (Particle* other = get_particle(); other != nullptr; other = get_particle()) {
             if (patrticle->collision(other))  {
-                //patrticle->resolve_collision(other);
+                patrticle->resolve_collision(other);
             }
         }
     }

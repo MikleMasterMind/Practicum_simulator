@@ -1,7 +1,5 @@
 #include "Particle.hpp"
 
-#include <iostream>
-
 Box_wiht_balls::Particle::Particle(double r, double x, double y, double vx, double vy, double mass) : 
     coordinates(x, y), radius(r), velocity(vx, vy), inv_mass(1/mass) {}
 
@@ -43,7 +41,7 @@ void Box_wiht_balls::Particle::resolve_collision(Box_wiht_balls::Particle* other
 
     Math_vector relative_velocity = other->velocity - this->velocity;
 
-    Math_vector normal = Math_vector(other->coordinates.x - this->coordinates.x, other->coordinates.y - this->coordinates.y); // collision vector (directed to other)
+    Math_vector normal = other->coordinates - this->coordinates;
     normal = Math_vector(normal.x / normal.module(), normal.y / normal.module()); // normalize
 
     double velocity_along_normal = relative_velocity * normal;
@@ -52,8 +50,8 @@ void Box_wiht_balls::Particle::resolve_collision(Box_wiht_balls::Particle* other
     
     double scalar_impulse = (velocity_along_normal * -2) / (this->inv_mass + other->inv_mass); // total impulse
     Math_vector impulse = normal * scalar_impulse; // total impulse vector
-    this->velocity = impulse * this->inv_mass;
-    other->velocity = impulse * other->inv_mass;
+    this->velocity = this->velocity - impulse * this->inv_mass;
+    other->velocity = other->velocity + impulse * other->inv_mass;
 }
 
 Box_wiht_balls::Circle Box_wiht_balls::Particle::get_image() const {

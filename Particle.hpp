@@ -2,8 +2,6 @@
 #define _Particle_H_
 
 #include "Math_vector.hpp"
-//#include "AABB.hpp"
-//#include "Shape.hpp"
 #include "Circle.hpp"
 
 namespace Box_wiht_balls {

@@ -4,13 +4,14 @@
 #include "Particle.hpp"
 #include <vector>
 
-#define TIME_STEP 0.0001
+#define TIME_STEP 0.016
 #define UP_BOUND 20
 #define DOWN_BOUND 620
 #define LEFT_BOUND 20
 #define RIGTH_BOUND 1160
 #define MAX_SPEED 400
 #define MAX_RADIUS 100
+#define MAX_MASS 1000
 
 
 namespace Box_wiht_balls {

@@ -4,6 +4,8 @@
 #include "System.hpp"
 #include "Painter.hpp"
 #include "Particle.hpp"
+#include "Small_particle.hpp"
+#include "Big_particle.hpp"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
@@ -46,9 +48,10 @@ namespace Box_wiht_balls {
 
         ~Simulator();
 
+        template <class particleT>
         void add_particle();
 
-        void generate_particles(int seed, int amount);
+        void generate_particles(int seed, int amount_small, int amount_big);
 
         void draw();
 
