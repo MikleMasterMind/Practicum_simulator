@@ -8,19 +8,11 @@ Box_wiht_balls::System::~System() {
     }
 }
 
-Box_wiht_balls::System* Box_wiht_balls::System::getSystem() {
-    if (!instacne)
-        instacne = new System();
-    return instacne;
-}
-
-Box_wiht_balls::System *Box_wiht_balls::System::instacne = nullptr;
-
 void Box_wiht_balls::System::add_particle(Box_wiht_balls::Particle *particle) {
     container.push_back(particle);
 }
 
-void Box_wiht_balls::System::set_container() {
+void Box_wiht_balls::System::open_container() {
     index = 0;
 }
 
@@ -36,7 +28,7 @@ void Box_wiht_balls::System::phisics_update() {
         Particle* patrticle = container[i];
         patrticle->move(time_step);
         patrticle->resolve_bound_collision(patrticle->check_bound_collision(UP_BOUND, DOWN_BOUND, LEFT_BOUND, RIGTH_BOUND));
-        set_container();
+        open_container();
         for (Particle* other = get_particle(); other != nullptr; other = get_particle()) {
             if (patrticle->collision(other))  {
                 //patrticle->resolve_collision(other);
@@ -45,28 +37,4 @@ void Box_wiht_balls::System::phisics_update() {
     }
 }
 
-void Box_wiht_balls::System::generate_particles(int amount, int seed) {
-    for (int i = 0; i < amount;) {
-        double radius = rand() % MAX_RADIUS;
-        double x = abs(rand()) % RIGTH_BOUND;
-        double y = abs(rand()) % DOWN_BOUND;
-        double vx = abs(rand()) % MAX_SPEED;
-        double vy = abs(rand()) % MAX_SPEED;
-        Box_wiht_balls::Particle* a = new Box_wiht_balls::Particle(radius, x, y, vx, vy);
-        if (a->check_bound_collision(UP_BOUND, DOWN_BOUND, LEFT_BOUND, RIGTH_BOUND) == no_bound) {
-            set_container();
-            for (Particle* b = get_particle(); b != nullptr; b = get_particle()) {
-                if (a->collision(b)) {
-                    delete a;
-                    a = nullptr;
-                    break;
-                }
-            }
-            if (a) {
-                add_particle(a);
-                ++i;
-            }
-        }
-        
-    }
-}
+

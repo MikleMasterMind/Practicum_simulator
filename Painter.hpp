@@ -10,25 +10,19 @@
 #include <FL/Fl_Widget.H>
 #include <FL/fl_draw.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Button.H>
 
 namespace Box_wiht_balls {
 
     class Painter : public Fl_Box {
 
-        static Painter* instance; // keep only 1 object here
         std::vector<Particle*> particles; // container with particles to draw
-
-        Painter(int x, int y, int w, int h, const char* s);
-
-        Painter(const Painter&) = delete;
-
-        void operator=(const Painter&) = delete;
         
     public:
 
-        ~Painter();
+        Painter(int x = 0, int y = 0, int w = 1180, int h = 640 + 200, const char* s = ""); // return pointer to object (object stored in heap)
 
-        static Painter* getPainter(int x, int y, int w, int h, const char* s = ""); // return pointer to object (object stored in heap)
+        ~Painter();
 
         void add_particle(Particle* particle);
 
@@ -36,7 +30,6 @@ namespace Box_wiht_balls {
 
         void update_image(); // to udpate movement
 
-        static void timer_callback(void* data); // timer
     };
 }
 

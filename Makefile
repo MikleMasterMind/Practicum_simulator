@@ -7,7 +7,8 @@ ALL = main.o \
 	Painter.o \
 	Particle.o \
 	Circle.o \
-	System.o
+	System.o \
+	Simulator.o
 
 all: ./a.out
 
@@ -15,13 +16,13 @@ all: ./a.out
 	$(COMPILER) $(ALL) $(WINFLAGS)
 
 main.o: main.cpp
-	$(COMPILER) $(CFLAGS) $(WINFLAGS) main.cpp
+	$(COMPILER) $(CFLAGS) main.cpp
 
 Math_vector.o: Math_vector.cpp
 	$(COMPILER) $(CFLAGS) Math_vector.cpp
 
 Painter.o: Painter.cpp
-	$(COMPILER) $(CFLAGS) $(WINFLAGS) Painter.cpp
+	$(COMPILER) $(CFLAGS) Painter.cpp
 
 Particle.o: Particle.cpp
 	$(COMPILER) $(CFLAGS) Particle.cpp
@@ -31,6 +32,9 @@ Circle.o: Circle.cpp
 
 System.o: System.cpp
 	$(COMPILER) $(CFLAGS) System.cpp
+
+Simulator.o: Simulator.cpp
+	$(COMPILER) $(CFLAGS) Simulator.cpp
 
 
 
