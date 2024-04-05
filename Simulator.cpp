@@ -35,11 +35,12 @@ void Box_wiht_balls::Simulator::add_particle() {
     while (!a) {
         double radius = rand() % MAX_RADIUS;
         double mass = rand() % MAX_MASS;
-        double x = abs(rand()) % RIGTH_BOUND + LEFT_BOUND;
-        double y = abs(rand()) % DOWN_BOUND + UP_BOUND;
+        double x = abs(rand()) % (RIGTH_BOUND - LEFT_BOUND)+ LEFT_BOUND;
+        double y = abs(rand()) % (DOWN_BOUND - UP_BOUND) + UP_BOUND;
         double vx = abs(rand()) % MAX_SPEED + 100; 
         double vy = abs(rand()) % MAX_SPEED + 100;
         a = new particleT(x, y, vx, vy, radius, mass);
+        std::cout << "a";
         if (a->check_bound_collision(UP_BOUND, DOWN_BOUND, LEFT_BOUND, RIGTH_BOUND) != no_bound) {
             delete a;
             a = nullptr;
@@ -92,29 +93,38 @@ void Box_wiht_balls::Simulator::show_dialog_add_callback(Fl_Widget *w, void *dat
     Simulator* sim = (Simulator*)data;
     sim->dialog_add = new Fl_Window(200, 150, "Chose particle to add");
     sim->add_small_particle_btn = new Fl_Button(50, 50, 100, 30, "Add Small Particle");
-    sim->add_small_particle_btn->callback(add_particle_callback, sim);
+    sim->add_small_particle_btn->callback(add_particle_callback<Small_particle>, sim);
     sim->add_big_particle_btn = new Fl_Button(50, 100, 100, 30, "Add Big Particle");
-    sim->add_big_particle_btn->callback(add_particle_callback, sim);
+    sim->add_big_particle_btn->callback(add_particle_callback<Big_particle>, sim);
     sim->dialog_add->show();
 }
 
+template <class particleT>
 void Box_wiht_balls::Simulator::add_particle_callback(Fl_Widget *w, void *data) {
     Simulator* sim = (Simulator*)data;
-    sim->add_particle<Small_particle>();       
+    sim->add_particle<particleT>();       
 }
 
 void Box_wiht_balls::Simulator::show_dialog_delete_callback(Fl_Widget *w, void *data) {
     Simulator* sim = (Simulator*)data;
     sim->dialog_delete = new Fl_Window(200, 150, "Chose particle to delete");
     sim->delete_small_particle_btn = new Fl_Button(50, 50, 100, 30, "Delete Small Particle");
-    sim->delete_small_particle_btn->callback(delete_particle_callback, sim);
+    sim->delete_small_particle_btn->callback(delete_particle_callback<Small_particle>, sim);
     sim->delete_big_particle_btn = new Fl_Button(50, 100, 100, 30, "Delete Big Particle");
-    sim->delete_big_particle_btn->callback(delete_particle_callback, sim);
+    sim->delete_big_particle_btn->callback(delete_particle_callback<Big_particle>, sim);
     sim->dialog_delete->show();
 }
 
+template <class particleT>
 void Box_wiht_balls::Simulator::delete_particle_callback(Fl_Widget *w, void *data) {
     Simulator* sim = (Simulator*)data;
-    sim->sys->delete_particle();
-    sim->pain->delete_particle();
+    sim->sys->open_container();
+    int count = 0;
+    for (Particle* a = sim->sys->get_particle(); a != nullptr; a = sim->sys->get_particle()) {
+        if (typeid(*a) == typeid(particleT)) {
+            sim->sys->delete_particle(count);
+            sim->pain->delete_particle(count);
+        }
+        ++count;
+    }
 }

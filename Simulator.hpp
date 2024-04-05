@@ -61,10 +61,12 @@ namespace Box_wiht_balls {
 
         static void show_dialog_add_callback(Fl_Widget* w, void* data);
 
+        template <class particleT>
         static void add_particle_callback(Fl_Widget* w, void* data);
 
         static void show_dialog_delete_callback(Fl_Widget* w, void* data);
 
+        template <class particleT>
         static void delete_particle_callback(Fl_Widget* w, void* data);
 
     };

@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "Particle.hpp"
+#include "Small_particle.hpp"
+#include "Big_particle.hpp"
 #include "Circle.hpp"
 
 #include <FL/Fl.H>

@@ -8,7 +8,9 @@ ALL = main.o \
 	Particle.o \
 	Circle.o \
 	System.o \
-	Simulator.o
+	Simulator.o \
+	Small_particle.o \
+	Big_particle.o
 
 all: ./a.out
 
@@ -36,7 +38,11 @@ System.o: System.cpp
 Simulator.o: Simulator.cpp
 	$(COMPILER) $(CFLAGS) Simulator.cpp
 
+Small_particle.o: Small_particle.cpp
+	$(COMPILER) $(CFLAGS) Small_particle.cpp
 
+Big_particle.o: Big_particle.cpp
+	$(COMPILER) $(CFLAGS) Big_particle.cpp
 
 clear:
 	rm *.o a.out

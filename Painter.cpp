@@ -1,5 +1,6 @@
 #include "Painter.hpp"
 
+#include <typeinfo>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Widget.H>
@@ -23,9 +24,11 @@ void Box_wiht_balls::Painter::delete_particle(int i) {
 void Box_wiht_balls::Painter::draw() {
     Fl_Box::draw();
     fl_begin_polygon();
-    fl_color(FL_RED);
     for (int i = 0; i < particles.size(); ++i) {
         Circle a = particles[i]->get_image();
+        if (typeid(*particles[i]) == typeid(Small_particle)) fl_color(FL_BLUE);
+        else if (typeid(*particles[i]) == typeid(Big_particle)) fl_color(FL_RED);
+        else fl_color(FL_GREEN);
         fl_circle(a.x, a.y, a.r);
     }
     fl_end_polygon();

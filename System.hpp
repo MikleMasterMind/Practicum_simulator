@@ -11,7 +11,7 @@
 #define RIGTH_BOUND 1160
 #define MAX_SPEED 400
 #define MAX_RADIUS 100
-#define MAX_MASS 1000
+#define MAX_MASS 25
 
 
 namespace Box_wiht_balls {
