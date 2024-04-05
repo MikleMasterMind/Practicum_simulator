@@ -4,7 +4,7 @@
 #include "Math_vector.hpp"
 #include "Circle.hpp"
 
-namespace Box_wiht_balls {
+namespace Box_with_balls {
 
     enum bound_type {
         no_bound = 0,

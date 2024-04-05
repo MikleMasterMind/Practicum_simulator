@@ -6,7 +6,7 @@
 #define SMALL_RADIUS 50
 #define SMALL_MASS 1
 
-namespace Box_wiht_balls {
+namespace Box_with_balls {
 
     class Small_particle : public Particle {
     public:

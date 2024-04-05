@@ -14,7 +14,7 @@
 #define MAX_MASS 25
 
 
-namespace Box_wiht_balls {
+namespace Box_with_balls {
 
     class System {
 

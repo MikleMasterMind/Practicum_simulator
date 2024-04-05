@@ -13,19 +13,21 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Input.H>
 #include <random>
+#include <string>
 
 #define WINDOW_W RIGTH_BOUND + 40
-#define WINDOW_H DOWN_BOUND + 120
+#define WINDOW_H DOWN_BOUND + 80
 
-namespace Box_wiht_balls {
+namespace Box_with_balls {
 
     enum btn {
         btn_x = 20,
         btn_y = 650,
         spacing = 50,
-        btn_w = 100,
-        btn_h = 40
+        btn_w = 110,
+        btn_h = 30
     };
 
     class Simulator: public Fl_Window {
@@ -41,6 +43,8 @@ namespace Box_wiht_balls {
         Fl_Window* dialog_delete;
         Fl_Button* delete_small_particle_btn;
         Fl_Button* delete_big_particle_btn;
+        Fl_Input* step_amount_inp;
+        long long step_amount;
 
     public:
 
@@ -68,6 +72,8 @@ namespace Box_wiht_balls {
 
         template <class particleT>
         static void delete_particle_callback(Fl_Widget* w, void* data);
+
+        static void set_step_amount_callback(Fl_Widget* w, void* data);
 
     };
 }

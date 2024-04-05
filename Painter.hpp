@@ -14,7 +14,7 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
 
-namespace Box_wiht_balls {
+namespace Box_with_balls {
 
     class Painter : public Fl_Box {
 

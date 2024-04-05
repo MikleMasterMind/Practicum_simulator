@@ -1,7 +1,7 @@
 #ifndef _Circle_H_
 #define _Circle_H_
 
-namespace Box_wiht_balls {
+namespace Box_with_balls {
     struct Circle {
         double x;
         double y;

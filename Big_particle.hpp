@@ -3,7 +3,7 @@
 
 #include "Particle.hpp"
 
-namespace Box_wiht_balls {
+namespace Box_with_balls {
 
     class Big_particle : public Particle {
     public:

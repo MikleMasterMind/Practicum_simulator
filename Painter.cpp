@@ -7,21 +7,21 @@
 #include <FL/fl_draw.H>
 #include <FL/Fl_Box.H>
 
-Box_wiht_balls::Painter::Painter(int x, int y, int w, int h, const char* s) : Fl_Box(x, y, w, h, s) {}
+Box_with_balls::Painter::Painter(int x, int y, int w, int h, const char* s) : Fl_Box(x, y, w, h, s) {}
 
-Box_wiht_balls::Painter::~Painter() {}
+Box_with_balls::Painter::~Painter() {}
 
-void Box_wiht_balls::Painter::add_particle(Box_wiht_balls::Particle *particle) {
+void Box_with_balls::Painter::add_particle(Box_with_balls::Particle *particle) {
     particles.push_back(particle);
 }
 
-void Box_wiht_balls::Painter::delete_particle(int i) {
+void Box_with_balls::Painter::delete_particle(int i) {
     if (particles.empty()) return;
     if (i == -1) particles.pop_back();
     else particles.erase(particles.begin() + i);
 }
 
-void Box_wiht_balls::Painter::draw() {
+void Box_with_balls::Painter::draw() {
     Fl_Box::draw();
     fl_begin_polygon();
     for (int i = 0; i < particles.size(); ++i) {
@@ -34,6 +34,6 @@ void Box_wiht_balls::Painter::draw() {
     fl_end_polygon();
 }
 
-void Box_wiht_balls::Painter::update_image() {
+void Box_with_balls::Painter::update_image() {
     redraw();
 }
