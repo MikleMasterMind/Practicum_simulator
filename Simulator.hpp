@@ -22,12 +22,22 @@
 
 namespace Box_with_balls {
 
-    enum btn {
+    enum win_sizes {
         btn_x = 20,
         btn_y = 650,
         spacing = 50,
         btn_w = 110,
         btn_h = 30
+    };
+
+    enum dialog_sizes {
+        dialog_win_w = 200,
+        dialog_win_h = 150,
+        dialog_btn_x = 25,
+        dialog_btn_y = 30,
+        dialog_btn_w = 150,
+        dialog_btn_h = 30,
+        dialog_spacing = 20
     };
 
     class Simulator: public Fl_Window {

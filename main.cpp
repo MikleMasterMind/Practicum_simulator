@@ -5,10 +5,11 @@
 
 int main() {
     Box_with_balls::Simulator sim;
-    int seed = 1;
-    int amounts = 1;
-    int amountb = 1;
-    sim.generate_particles(seed, amounts, amountb);
+    int seed;
+    int amount_small;
+    int amount_big;
+    std::cin >> seed >> amount_small >> amount_big;
+    sim.generate_particles(seed, amount_small, amount_big);
     sim.end();
     sim.show();
     return Fl::run();

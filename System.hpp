@@ -10,6 +10,7 @@
 #define LEFT_BOUND 20
 #define RIGTH_BOUND 1160
 #define MAX_SPEED 400
+#define MIN_SPEED 100
 #define MAX_RADIUS 100
 #define MAX_MASS 25
 

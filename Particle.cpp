@@ -1,32 +1,32 @@
 #include "Particle.hpp"
 
 Box_with_balls::Particle::Particle(double r, double x, double y, double vx, double vy, double mass) : 
-    coordinates(x, y), radius(r), velocity(vx, vy), inv_mass(1/mass) {}
+    coordinates(x, y), velocity(vx, vy), radius(r), inv_mass(1/mass) {}
 
 Box_with_balls::Particle::Particle(double r, Box_with_balls::Math_vector c, Box_with_balls::Math_vector v, double mass) : 
-    coordinates(c), radius(r), velocity(v), inv_mass(1/mass) {}
+    coordinates(c), velocity(v), radius(r), inv_mass(1/mass) {}
 
 void Box_with_balls::Particle::move(double dt) {
     coordinates = coordinates + velocity * dt;
 }
 
-Box_with_balls::bound_type Box_with_balls::Particle::check_bound_collision(int up, int down, int left, int rigth) const {
-    if (coordinates.y - radius < up)
-        return up_bound;
-    if (coordinates.y + radius > down)
-        return down_bound;
-    if (coordinates.x - radius < left)
-        return left_bound;
-    if (coordinates.x + radius > rigth)
-        return rigth_bound;
-    return no_bound;
-}
-
-void Box_with_balls::Particle::resolve_bound_collision(Box_with_balls::bound_type type) {
-    if (type == up_bound || type == down_bound)
-        velocity.y = -velocity.y;
-    else if (type == left_bound || type == rigth_bound)
+void Box_with_balls::Particle::bound_collision(int up, int down, int left, int rigth) {
+    if (coordinates.x - radius < left) {
         velocity.x = -velocity.x;
+        coordinates.x = left + radius;
+    }
+    if (coordinates.x + radius > rigth) {
+        velocity.x = -velocity.x;
+        coordinates.x = rigth - radius;
+    }
+    if (coordinates.y - radius < up) {
+        velocity.y = -velocity.y;
+        coordinates.y = up + radius;
+    }
+    if (coordinates.y + radius > down) {
+        velocity.y = -velocity.y;
+        coordinates.y = down - radius;
+    }
     return;
 }
 

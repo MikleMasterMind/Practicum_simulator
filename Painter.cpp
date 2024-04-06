@@ -9,7 +9,11 @@
 
 Box_with_balls::Painter::Painter(int x, int y, int w, int h, const char* s) : Fl_Box(x, y, w, h, s) {}
 
-Box_with_balls::Painter::~Painter() {}
+Box_with_balls::Painter::~Painter() {
+    for (int i = 0; i < (int)particles.size(); ++i) {
+        delete particles[i];
+    }
+}
 
 void Box_with_balls::Painter::add_particle(Box_with_balls::Particle *particle) {
     particles.push_back(particle);
@@ -17,14 +21,17 @@ void Box_with_balls::Painter::add_particle(Box_with_balls::Particle *particle) {
 
 void Box_with_balls::Painter::delete_particle(int i) {
     if (particles.empty()) return;
-    if (i == -1) particles.pop_back();
-    else particles.erase(particles.begin() + i);
+    if (i == -1) {
+        particles.pop_back();
+    } else {
+        particles.erase(particles.begin() + i);
+    }
 }
 
 void Box_with_balls::Painter::draw() {
     Fl_Box::draw();
     fl_begin_polygon();
-    for (int i = 0; i < particles.size(); ++i) {
+    for (int i = 0; i < (int)particles.size(); ++i) {
         Circle a = particles[i]->get_image();
         if (typeid(*particles[i]) == typeid(Small_particle)) fl_color(FL_BLUE);
         else if (typeid(*particles[i]) == typeid(Big_particle)) fl_color(FL_RED);
