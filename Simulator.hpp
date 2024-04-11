@@ -44,7 +44,7 @@ namespace Box_with_balls {
 
         System* sys;
         Painter* pain;
-        Fl_Button* begin_btn;
+        Fl_Button* do_steps_btn;
         Fl_Button* add_particle_btn;
         Fl_Window* dialog_add;
         Fl_Button* add_small_particle_btn;
@@ -54,6 +54,7 @@ namespace Box_with_balls {
         Fl_Button* delete_small_particle_btn;
         Fl_Button* delete_big_particle_btn;
         Fl_Input* step_amount_inp;
+        long long step_count;
         long long step_amount;
 
     public:

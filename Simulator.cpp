@@ -9,8 +9,8 @@ Box_with_balls::Simulator::Simulator() :
     sys = new System;
     pain = new Painter(RIGTH_BOUND, UP_BOUND, LEFT_BOUND, DOWN_BOUND);
 
-    begin_btn = new Fl_Button(btn_x, btn_y, btn_w, btn_h, "Begin");
-    begin_btn->callback(step_callback, this);
+    do_steps_btn = new Fl_Button(btn_x, btn_y, btn_w, btn_h, "Begin");
+    //do_steps_btn->callback(step_callback, this);
 
     add_particle_btn = new Fl_Button(btn_x + btn_w + spacing, btn_y, btn_w, btn_h, "Add Particle");
     add_particle_btn->callback(show_dialog_add_callback, this);
@@ -20,14 +20,14 @@ Box_with_balls::Simulator::Simulator() :
 
     step_amount_inp = new Fl_Input(btn_x + (btn_w + spacing) * 3, btn_y, btn_w * 5, btn_h);
     step_amount_inp->callback(set_step_amount_callback, this);
-    step_amount_inp->when(FL_WHEN_ENTER_KEY);
+    //step_amount_inp->when(FL_WHEN_ENTER_KEY);
     step_amount_inp->take_focus();
 }
 
 Box_with_balls::Simulator::~Simulator() {
     delete sys;
     delete pain;
-    delete begin_btn;
+    delete do_steps_btn;
     delete add_particle_btn;
     delete dialog_add;
     delete add_small_particle_btn;
@@ -84,14 +84,18 @@ void Box_with_balls::Simulator::draw() {
 }
 
 void Box_with_balls::Simulator::step_callback(Fl_Widget* w, void* data) {
-    w->callback(nullptr, nullptr); // to turn of button
     Fl::add_timeout(TIME_STEP, timer_callback, data);
 }
 
 void Box_with_balls::Simulator::timer_callback(void* data) {
     Simulator* sim = (Simulator*)data;
-    if (sim->step_amount <= 0) return;
-    else --sim->step_amount;
+    if (sim->step_count >= sim->step_amount) {
+        sim->step_count = 0;
+        return;
+    }
+    else {
+        ++sim->step_count;
+    }
     sim->redraw();
     Fl::add_timeout(TIME_STEP, timer_callback, sim);
 }
@@ -147,4 +151,6 @@ void Box_with_balls::Simulator::set_step_amount_callback(Fl_Widget *w, void *dat
     Simulator* sim = (Simulator*)data;
     const char* input_data = sim->step_amount_inp->value();
     sim->step_amount = atoi(input_data);
+    sim->step_count = 0;
+    sim->do_steps_btn->callback(step_callback, sim);
 }
