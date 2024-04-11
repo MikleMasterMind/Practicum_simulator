@@ -32,11 +32,12 @@ void Box_with_balls::Painter::draw() {
     Fl_Box::draw();
     fl_begin_polygon();
     for (int i = 0; i < (int)particles.size(); ++i) {
-        Circle a = particles[i]->get_image();
+        Math_vector coordinates = particles[i]->get_coordinates();
+        double radius = particles[i]->get_radius();
         if (typeid(*particles[i]) == typeid(Small_particle)) fl_color(FL_BLUE);
         else if (typeid(*particles[i]) == typeid(Big_particle)) fl_color(FL_RED);
         else fl_color(FL_GREEN);
-        fl_circle(a.x, a.y, a.r);
+        fl_circle(coordinates.x, coordinates.y, radius);
     }
     fl_end_polygon();
 }

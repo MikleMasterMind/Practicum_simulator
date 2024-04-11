@@ -9,7 +9,7 @@ Box_with_balls::Simulator::Simulator() :
     sys = new System;
     pain = new Painter(RIGTH_BOUND, UP_BOUND, LEFT_BOUND, DOWN_BOUND);
 
-    do_steps_btn = new Fl_Button(btn_x, btn_y, btn_w, btn_h, "Begin");
+    do_steps_btn = new Fl_Button(btn_x, btn_y, btn_w, btn_h, "Do Steps");
     //do_steps_btn->callback(step_callback, this);
 
     add_particle_btn = new Fl_Button(btn_x + btn_w + spacing, btn_y, btn_w, btn_h, "Add Particle");
@@ -39,17 +39,14 @@ Box_with_balls::Simulator::~Simulator() {
     delete step_amount_inp;
 }
 
-template<class particleT> 
-void Box_with_balls::Simulator::add_particle() {
+void Box_with_balls::Simulator::add_small_particle() {
     Particle* a = nullptr;
     while (!a) {
-        double radius = rand() % MAX_RADIUS;
-        double mass = rand() % MAX_MASS;
         double x = abs(rand()) % (RIGTH_BOUND - LEFT_BOUND)+ LEFT_BOUND;
         double y = abs(rand()) % (DOWN_BOUND - UP_BOUND) + UP_BOUND;
         double vx = abs(rand()) % MAX_SPEED + MIN_SPEED; 
         double vy = abs(rand()) % MAX_SPEED + MIN_SPEED;
-        a = new particleT(x, y, vx, vy, radius, mass);
+        a = new Small_particle(x, y, vx, vy);
         a->bound_collision(UP_BOUND, DOWN_BOUND, LEFT_BOUND, RIGTH_BOUND);
         sys->open_container();
         for (Particle* b = sys->get_particle(); b != nullptr; b = sys->get_particle()) {
@@ -64,12 +61,36 @@ void Box_with_balls::Simulator::add_particle() {
     pain->add_particle(a);
 }
 
+void Box_with_balls::Simulator::add_big_particle() {
+    Particle* a = nullptr;
+    while (!a) {
+        double radius = rand() % MAX_RADIUS;
+        double mass = rand() % MAX_MASS;
+        double x = abs(rand()) % (RIGTH_BOUND - LEFT_BOUND)+ LEFT_BOUND;
+        double y = abs(rand()) % (DOWN_BOUND - UP_BOUND) + UP_BOUND;
+        double vx = abs(rand()) % MAX_SPEED + MIN_SPEED; 
+        double vy = abs(rand()) % MAX_SPEED + MIN_SPEED;
+        a = new Big_particle(x, y, vx, vy, radius, mass);
+        a->bound_collision(UP_BOUND, DOWN_BOUND, LEFT_BOUND, RIGTH_BOUND);
+        sys->open_container();
+        for (Particle* b = sys->get_particle(); b != nullptr; b = sys->get_particle()) {
+            if (a->collision(b)) {
+                delete a;
+                a = nullptr;
+                break;
+            }
+        } 
+    }
+    sys->add_particle(a);
+    pain->add_particle(a); 
+}
+
 void Box_with_balls::Simulator::generate_particles(int seed, int amount_small, int amount_big) {
     srand(seed);
     for (int i = 0; i < amount_small; ++i)
-        add_particle<Small_particle>();
+        add_small_particle();
     for (int i = 0; i < amount_big; ++i)
-        add_particle<Big_particle>();
+        add_big_particle();
     
 }
 
@@ -106,17 +127,21 @@ void Box_with_balls::Simulator::show_dialog_add_callback(Fl_Widget *w, void *dat
         sim->dialog_add = new Fl_Window(dialog_win_w, dialog_win_h, "Chose particle to add");
     if (!sim->add_small_particle_btn) 
         sim->add_small_particle_btn = new Fl_Button(dialog_btn_x, dialog_btn_y, dialog_btn_w, dialog_btn_h, "Add Small Particle");
-    sim->add_small_particle_btn->callback(add_particle_callback<Small_particle>, sim);
+    sim->add_small_particle_btn->callback(add_small_particle_callback, sim);
     if (!sim->add_big_particle_btn) 
         sim->add_big_particle_btn = new Fl_Button(dialog_btn_x, dialog_btn_y + dialog_btn_h + dialog_spacing, dialog_btn_w, dialog_btn_h, "Add Big Particle");
-    sim->add_big_particle_btn->callback(add_particle_callback<Big_particle>, sim);
+    sim->add_big_particle_btn->callback(add_big_particle_callback, sim);
     sim->dialog_add->show();
 }
 
-template <class particleT>
-void Box_with_balls::Simulator::add_particle_callback(Fl_Widget *w, void *data) {
+void Box_with_balls::Simulator::add_small_particle_callback(Fl_Widget *w, void *data) {
     Simulator* sim = (Simulator*)data;
-    sim->add_particle<particleT>();       
+    sim->add_small_particle();       
+}
+
+void Box_with_balls::Simulator::add_big_particle_callback(Fl_Widget *w, void *data) {
+    Simulator* sim = (Simulator*)data;
+    sim->add_big_particle(); 
 }
 
 void Box_with_balls::Simulator::show_dialog_delete_callback(Fl_Widget *w, void *data) {

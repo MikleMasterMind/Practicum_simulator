@@ -3,16 +3,24 @@
 
 #include "Particle.hpp"
 
-#define SMALL_RADIUS 50
-#define SMALL_MASS 1
-
 namespace Box_with_balls {
+
+    const double SMALL_RADIUS = 50;
+    const double SMALL_MASS = 1;
 
     class Small_particle : public Particle {
     public:
         Small_particle(double x, double y, double vx, double vy);
 
-        Small_particle(double x, double y, double vx, double vy, double r, double m);
+        virtual double get_radius() const;
+
+        virtual double get_inv_mass() const;
+
+        virtual void bound_collision(int up, int down, int left, int rigth);
+
+        virtual bool collision(const Particle* other) const;
+
+        virtual void resolve_collision(Particle* other);
     };
 }
 
