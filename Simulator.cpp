@@ -20,7 +20,6 @@ Box_with_balls::Simulator::Simulator() :
 
     step_amount_inp = new Fl_Input(btn_x + (btn_w + spacing) * 3, btn_y, btn_w * 5, btn_h);
     step_amount_inp->callback(set_step_amount_callback, this);
-    //step_amount_inp->when(FL_WHEN_ENTER_KEY);
     step_amount_inp->take_focus();
 }
 

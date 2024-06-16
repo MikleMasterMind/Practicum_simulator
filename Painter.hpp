@@ -5,7 +5,6 @@
 #include "Particle.hpp"
 #include "Small_particle.hpp"
 #include "Big_particle.hpp"
-#include "Circle.hpp"
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
@@ -26,9 +25,9 @@ namespace Box_with_balls {
 
         ~Painter();
 
-        void add_particle(Particle* particle);
+        void add_particle(Particle* particle); // add particle to conteiner
 
-        void delete_particle(int i = -1);
+        void delete_particle(int i = -1); // remove particle from conteiner
 
         void draw(); // to paint shot
 

@@ -16,7 +16,7 @@ void Box_with_balls::Big_particle::bound_collision(int up, int down, int left, i
     Math_vector velocity = get_velocity();
     if (coordinates.x - radius < left) {
         velocity.x = -velocity.x;
-        coordinates.x = left + radius;
+        coordinates.x = left + radius; // particle will not 
     }
     if (coordinates.x + radius > rigth) {
         velocity.x = -velocity.x;

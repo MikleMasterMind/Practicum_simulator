@@ -34,9 +34,9 @@ void Box_with_balls::Painter::draw() {
     for (int i = 0; i < (int)particles.size(); ++i) {
         Math_vector coordinates = particles[i]->get_coordinates();
         double radius = particles[i]->get_radius();
-        if (typeid(*particles[i]) == typeid(Small_particle)) fl_color(FL_BLUE);
-        else if (typeid(*particles[i]) == typeid(Big_particle)) fl_color(FL_RED);
-        else fl_color(FL_GREEN);
+        if (typeid(*particles[i]) == typeid(Small_particle)) fl_color(FL_BLUE); // small -> blue
+        else if (typeid(*particles[i]) == typeid(Big_particle)) fl_color(FL_RED); // big -> red
+        else fl_color(FL_GREEN); // other -> green
         fl_circle(coordinates.x, coordinates.y, radius);
     }
     fl_end_polygon();

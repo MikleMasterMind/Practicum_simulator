@@ -6,7 +6,6 @@ ALL = main.o \
 	Math_vector.o \
 	Painter.o \
 	Particle.o \
-	Circle.o \
 	System.o \
 	Simulator.o \
 	Small_particle.o \
@@ -28,9 +27,6 @@ Painter.o: Painter.cpp
 
 Particle.o: Particle.cpp
 	$(COMPILER) $(CFLAGS) Particle.cpp
-
-Circle.o: Circle.cpp
-	$(COMPILER) $(CFLAGS) Circle.cpp
 
 System.o: System.cpp
 	$(COMPILER) $(CFLAGS) System.cpp

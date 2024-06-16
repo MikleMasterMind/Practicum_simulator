@@ -26,15 +26,15 @@ namespace Box_with_balls {
 
         virtual double get_radius() const = 0;
 
-        virtual double get_inv_mass() const = 0;
+        virtual double get_inv_mass() const = 0; // return 1 / mass
 
-        virtual void move(double dt);
+        virtual void move(double dt); // x = x + v * dt
 
-        virtual void bound_collision(int up, int down, int left, int rigth) = 0;
+        virtual void bound_collision(int up, int down, int left, int rigth) = 0; // particle meet bound
 
         virtual bool collision(const Particle* other) const = 0; // find collision with other
 
-        virtual void resolve_collision(Particle* other) = 0; // chenge its velocity and other's 
+        virtual void resolve_collision(Particle* other) = 0; // change its velocity and other's 
 
     };
 }
